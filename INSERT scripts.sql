@@ -9,6 +9,7 @@ VALUES
 INSERT INTO students
     (surname, name)
 VALUES
+    ('Alekseev', 'Gleb'),
     ('Serdyuk', 'Andrej'),
     ('Merkushev', 'Erik'),
     ('Fadeev', 'Andrej'),
@@ -20,7 +21,6 @@ VALUES
     ('Belyakov', 'YAroslav'),
     ('Hovanskij', 'Garri'),
     ('Turov', 'Avgust'),
-    ('Alekseev', 'Gleb'),
     ('Predybajlo', 'Gleb'),
     ('Andrusejko', 'Cefas'),
     ('Kravchuk', 'CHarlz'),
@@ -121,26 +121,24 @@ VALUES
     ('PE', '4');
 
 --next part use random filling for student's lessons
-DO
-$do$
+DECLARE @i INT = 2
+
+WHILE (@i < 100)
 BEGIN
-    FOR i IN 1..99 LOOP
-    INSERT INTO student_lesson
+   INSERT INTO student_lesson
         (student_id, lesson_id)
     VALUES
-        (i, floor(random() * (7-1+1) + 1)
-    ::int);
-END
-LOOP;
-END
-$do$;
+        (@i, floor(rand() * (7-1+1) + 1))
+   SET @i = @i + 1
+END;
 
 INSERT INTO student_lesson
     (student_id, lesson_id)
 VALUES
 
-    ('1', '1'),
-    ('12', '2'),
+    ('1', '2'),
+    ('1', '5'),
+    ('12', '1'),
     ('22', '3'),
     ('43', '4'),
     ('89', '5'),
